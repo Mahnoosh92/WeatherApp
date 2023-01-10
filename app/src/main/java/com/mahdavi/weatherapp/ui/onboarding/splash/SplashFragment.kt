@@ -19,9 +19,10 @@ private const val ARG_PARAM2 = "param2"
  * Use the [SplashFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class SplashFragment : Fragment() {
+class SplashFragment : Fragment(), SplashContract.View {
     private var _binding: FragmentSplashBinding? = null
     private val binding get() = _binding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,6 +36,22 @@ class SplashFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun showLoader() {
+        TODO("Not yet implemented")
+    }
+
+    override fun hideLoader() {
+        TODO("Not yet implemented")
+    }
+
+    override fun navigateToOnBoarding() {
+        TODO("Not yet implemented")
+    }
+
+    override fun navigateToAuth() {
+        TODO("Not yet implemented")
     }
 
 

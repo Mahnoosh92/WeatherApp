@@ -24,7 +24,9 @@ inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Fragmen
 }
 
 fun AppCompatActivity.addFragment(fragment: Fragment, frameId: Int) {
-    supportFragmentManager.inTransaction { add(frameId, fragment, fragment.javaClass.simpleName) }
+    supportFragmentManager.inTransaction {
+        add(frameId, fragment, fragment.javaClass.simpleName)
+    }
 }
 
 fun AppCompatActivity.replaceFragment(fragment: Fragment, frameId: Int) {

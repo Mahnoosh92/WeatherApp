@@ -1,11 +1,10 @@
-package com.mahdavi.weatherapp.ui.onboarding.splash
+package com.mahdavi.weatherapp.ui.splash
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.mahdavi.weatherapp.R
 import com.mahdavi.weatherapp.databinding.FragmentOnBoardingBinding
 import com.mahdavi.weatherapp.databinding.FragmentSplashBinding
 

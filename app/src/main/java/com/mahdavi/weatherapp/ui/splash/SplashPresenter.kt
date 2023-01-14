@@ -1,6 +1,6 @@
-package com.mahdavi.weatherapp.ui.onboarding.splash
+package com.mahdavi.weatherapp.ui.splash
 
-import com.mahdavi.weatherapp.data.model.local.enums.UserStatus
+import com.mahdavi.weatherapp.data.model.local.user.UserStatus
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 
 class SplashPresenter : SplashContract.Presenter {
@@ -9,7 +9,7 @@ class SplashPresenter : SplashContract.Presenter {
     private var view: SplashContract.View? = null
 
     override fun getUserStatus(): UserStatus {
-        TODO("Not yet implemented")
+        return UserStatus.NEW_USER
     }
 
     override fun detachView(view: SplashContract.View) {

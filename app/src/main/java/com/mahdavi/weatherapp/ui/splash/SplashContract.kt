@@ -1,6 +1,6 @@
-package com.mahdavi.weatherapp.ui.onboarding.splash
+package com.mahdavi.weatherapp.ui.splash
 
-import com.mahdavi.weatherapp.data.model.local.enums.UserStatus
+import com.mahdavi.weatherapp.data.model.local.user.UserStatus
 import com.mahdavi.weatherapp.ui.base.BasePresenter
 import com.mahdavi.weatherapp.ui.base.BaseView
 

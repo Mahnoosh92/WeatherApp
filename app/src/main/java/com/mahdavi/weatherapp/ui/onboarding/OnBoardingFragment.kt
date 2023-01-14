@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.mahdavi.weatherapp.databinding.FragmentOnBoardingBinding
-import com.mahdavi.weatherapp.ui.onboarding.splash.SplashFragment
+import com.mahdavi.weatherapp.ui.splash.SplashFragment
 import com.mahdavi.weatherapp.utils.extensions.replaceFragment
 
 

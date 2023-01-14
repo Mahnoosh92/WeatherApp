@@ -17,7 +17,7 @@ class OnBoardingActivity : AppCompatActivity() {
         binding = ActivityOnBoardingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        addFragment(OnBoardingFragment(), binding.container.id, false)
+        addFragment(SplashFragment(), binding.container.id, false)
     }
 
     fun navigateToSplash() {

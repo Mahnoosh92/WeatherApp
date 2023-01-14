@@ -9,20 +9,11 @@ import com.mahdavi.weatherapp.R
 import com.mahdavi.weatherapp.databinding.FragmentOnBoardingBinding
 import com.mahdavi.weatherapp.databinding.FragmentSplashBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SplashFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SplashFragment : Fragment(), SplashContract.View {
+
     private var _binding: FragmentSplashBinding? = null
     private val binding get() = _binding!!
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,25 +24,30 @@ class SplashFragment : Fragment(), SplashContract.View {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        showLoader()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
     override fun showLoader() {
-        TODO("Not yet implemented")
+
     }
 
     override fun hideLoader() {
-        TODO("Not yet implemented")
+
     }
 
     override fun navigateToOnBoarding() {
-        TODO("Not yet implemented")
+
     }
 
     override fun navigateToAuth() {
-        TODO("Not yet implemented")
+
     }
 
 

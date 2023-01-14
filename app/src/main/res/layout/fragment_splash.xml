@@ -3,12 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.onboarding.splash.SplashFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/splash"
+        app:lottie_rawRes="@raw/hypercube"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        android:layout_width="@dimen/fixed_500"
+        android:layout_gravity="center"
+        android:layout_height="@dimen/fixed_500" />
+
 
 </FrameLayout>

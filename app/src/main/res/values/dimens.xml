@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="fixed_50">50dp</dimen>
+    <dimen name="fixed_100">100dp</dimen>
+    <dimen name="fixed_500">500dp</dimen>
+</resources>

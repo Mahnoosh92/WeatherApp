@@ -29,10 +29,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "BASE_URL", "\"https://api.newscatcherapi.com/v2/\""
+            buildConfigField "String", "BASE_URL", "\"http://dataservice.accuweather.com/locations/v1/\""
         }
         debug {
-            buildConfigField "String", "BASE_URL", "\"https://api.newscatcherapi.com/v2/\""
+            buildConfigField "String", "BASE_URL", "\"http://dataservice.accuweather.com/locations/v1/\""
         }
     }
     compileOptions {
@@ -50,7 +50,7 @@ android {
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.appcompat:appcompat:1.6.0'
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
@@ -82,10 +82,10 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
     // Room
-    implementation 'androidx.room:room-runtime:2.4.3'
-    implementation 'androidx.room:room-ktx:2.4.3'
-    kapt 'androidx.room:room-compiler:2.4.3'
-    implementation 'androidx.room:room-rxjava3:2.4.3'
+    implementation 'androidx.room:room-runtime:2.5.0'
+    implementation 'androidx.room:room-ktx:2.5.0'
+    kapt 'androidx.room:room-compiler:2.5.0'
+    implementation 'androidx.room:room-rxjava3:2.5.0'
 
     // Lottie
     implementation 'com.airbnb.android:lottie:4.1.0'

@@ -3,10 +3,8 @@ package com.mahdavi.weatherapp.data.model.local.cities
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
-class cities : ArrayList<CitiesItem>()
-
 @JsonClass(generateAdapter = true)
-data class CitiesItem(
+data class City(
     val administrativeArea: AdministrativeArea,
     val country: Country,
     @Json(name = "DataSets") val dataSets: List<String>,

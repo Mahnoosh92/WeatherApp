@@ -1,17 +1,17 @@
-package com.mahdavi.weatherapp.ui.splash
+package com.mahdavi.weatherapp.ui.auth.login
 
-import com.mahdavi.weatherapp.data.model.local.user.UserStatus
 import com.mahdavi.weatherapp.ui.base.BasePresenter
 import com.mahdavi.weatherapp.ui.base.BaseView
 
-interface SplashContract {
+interface LoginContract {
     interface View : BaseView {
         fun showLoader()
         fun hideLoader()
-        fun navigateToAuth()
+        fun navigateToRegister()
+        fun navigateToHome()
     }
 
     interface Presenter : BasePresenter<View> {
-        fun getUserStatus()
+
     }
 }

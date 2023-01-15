@@ -1,10 +1,12 @@
 package com.mahdavi.weatherapp.ui.onboarding
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.mahdavi.weatherapp.R
 import com.mahdavi.weatherapp.databinding.ActivityOnBoardingBinding
-import com.mahdavi.weatherapp.ui.splash.SplashFragment
+import com.mahdavi.weatherapp.ui.auth.AuthActivity
+import com.mahdavi.weatherapp.ui.splash.SplashActivity
 import com.mahdavi.weatherapp.utils.extensions.addFragment
 import com.mahdavi.weatherapp.utils.extensions.replaceFragment
 
@@ -16,11 +18,16 @@ class OnBoardingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityOnBoardingBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        addFragment(SplashFragment(), binding.container.id, false)
+        checkUserStatus()
+        navigateToSplash()
     }
 
+    fun checkUserStatus() {
+
+    }
     fun navigateToSplash() {
-        replaceFragment(SplashFragment(), binding.container.id, true)
+        val intent = Intent(this, SplashActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

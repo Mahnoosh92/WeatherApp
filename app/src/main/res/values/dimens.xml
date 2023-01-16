@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="padding_10">10dp</dimen>
+
+
     <dimen name="fixed_50">50dp</dimen>
     <dimen name="fixed_100">100dp</dimen>
+    <dimen name="fixed_300">300dp</dimen>
     <dimen name="fixed_500">500dp</dimen>
 </resources>

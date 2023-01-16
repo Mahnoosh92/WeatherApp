@@ -10,18 +10,17 @@ import androidx.fragment.app.Fragment
 
 abstract class BaseFragment : Fragment(){
     abstract fun setupUi()
+    abstract fun registerView()
     abstract fun setupObservers()
     abstract fun setupListeners()
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        registerView()
         setupUi()
         setupListeners()
         setupObservers()
     }
+
 
     override fun onDestroy() {
         super.onDestroy()

@@ -5,4 +5,10 @@
     <string name="create_account">create an account</string>
     <string name="or">or</string>
     <string name="continue_google">continue with google</string>
+    <string name="login_phone_number">Enter phone number</string>
+    <string name="submit">Submit</string>
+    <string name="general_error">Something went wrong!</string>
+    <string name="latitude">Latitude:</string>
+    <string name="longitude">Longitude:</string>
+    <string name="country">Country</string>
 </resources>

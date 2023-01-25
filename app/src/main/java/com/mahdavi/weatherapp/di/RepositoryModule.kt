@@ -2,8 +2,10 @@ package com.mahdavi.weatherapp.di
 
 import com.mahdavi.weatherapp.data.repository.city.CityRepository
 import com.mahdavi.weatherapp.data.repository.city.DefaultCityRepository
-import com.mahdavi.weatherapp.data.repository.user.authentication.google.AuthGoogleRepository
-import com.mahdavi.weatherapp.data.repository.user.authentication.google.DefaultAuthGoogleRepository
+import com.mahdavi.weatherapp.data.repository.user.DefaultUserRepository
+import com.mahdavi.weatherapp.data.repository.user.UserRepository
+import com.mahdavi.weatherapp.data.repository.user.authentication.AuthRepository
+import com.mahdavi.weatherapp.data.repository.user.authentication.DefaultAuthRepository
 import dagger.Binds
 import dagger.Module
 
@@ -13,5 +15,9 @@ abstract class RepositoryModule {
     abstract fun bindCityRepository(defaultCityRepository: DefaultCityRepository): CityRepository
 
     @Binds
-    abstract fun bindAuthGoogleRepository(defaultAuthGoogleRepository: DefaultAuthGoogleRepository): AuthGoogleRepository
+    abstract fun bindAuthGoogleRepository(defaultAuthGoogleRepository: DefaultAuthRepository): AuthRepository
+
+
+    @Binds
+    abstract fun bindUserRepository(defaultUserRepository: DefaultUserRepository): UserRepository
 }

@@ -9,6 +9,8 @@ interface SplashContract {
         fun showLoader()
         fun hideLoader()
         fun navigateToAuth()
+        fun navigateToDashboard()
+        fun showError(message:String)
     }
 
     interface Presenter : BasePresenter<View> {

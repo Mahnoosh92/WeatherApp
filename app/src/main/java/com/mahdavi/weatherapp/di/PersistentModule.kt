@@ -17,4 +17,8 @@ object PersistenceModule {
     )
         .fallbackToDestructiveMigration()
         .build()
+
+    @Provides
+    @Singleton
+    fun provideCityDao(db: AppDataBase) = db.cityDao()
 }

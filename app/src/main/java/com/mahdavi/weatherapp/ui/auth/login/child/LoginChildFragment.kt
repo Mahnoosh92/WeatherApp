@@ -44,7 +44,7 @@ class LoginChildFragment : BaseFragment() {
 
     }
 
-    override fun setupObservers() {
+    override fun setupSubscribers() {
 
     }
 

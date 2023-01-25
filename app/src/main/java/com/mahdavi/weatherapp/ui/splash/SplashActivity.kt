@@ -7,6 +7,8 @@ import com.mahdavi.weatherapp.MyApp
 import com.mahdavi.weatherapp.databinding.ActivitySplashBinding
 import com.mahdavi.weatherapp.ui.auth.AuthActivity
 import com.mahdavi.weatherapp.ui.base.BaseActivity
+import com.mahdavi.weatherapp.ui.dashboard.DashboardActivity
+import com.mahdavi.weatherapp.utils.extensions.shortSnackBar
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import java.util.concurrent.TimeUnit
@@ -28,13 +30,14 @@ class SplashActivity : BaseActivity(), SplashContract.View {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
         presenter.attachView(this)
+
     }
 
     override fun setupUi() {
        presenter.getUserStatus()
     }
 
-    override fun setupObservers() {
+    override fun setupSubscribers() {
 
     }
 
@@ -54,6 +57,16 @@ class SplashActivity : BaseActivity(), SplashContract.View {
         val intent = Intent(this, AuthActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    override fun navigateToDashboard() {
+        val intent = Intent(this, DashboardActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    override fun showError(message: String) {
+        binding.root.shortSnackBar(message)
     }
 
     override fun onDestroy() {

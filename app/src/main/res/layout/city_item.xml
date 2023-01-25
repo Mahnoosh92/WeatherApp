@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_10"
+    app:cardCornerRadius="@dimen/radius_12"
+    app:cardElevation="@dimen/elevation_10">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_10">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ic_country"
+            android:layout_width="@dimen/fixed_30"
+            android:layout_height="@dimen/fixed_30"
+            android:src="@drawable/ic_country"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/country"
+            style="@style/regularText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_20"
+            android:textSize="@dimen/font_18"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/ic_country"
+            app:layout_constraintStart_toEndOf="@id/ic_country"
+            app:layout_constraintTop_toTopOf="@id/ic_country"
+            tools:text="country" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ic_long"
+            android:layout_width="@dimen/fixed_30"
+            android:layout_height="@dimen/fixed_30"
+            android:layout_marginTop="@dimen/margin_20"
+            android:src="@drawable/ic_map"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ic_country" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/longitude_title"
+            style="@style/regularText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_20"
+            android:text="@string/longitude"
+            android:textSize="@dimen/font_18"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/ic_long"
+            app:layout_constraintStart_toEndOf="@id/ic_long"
+            app:layout_constraintTop_toTopOf="@id/ic_long" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/longitude"
+            style="@style/regularText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_20"
+            android:textSize="@dimen/font_16"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/longitude_title"
+            app:layout_constraintStart_toEndOf="@id/longitude_title"
+            app:layout_constraintTop_toTopOf="@id/longitude_title"
+            tools:text="longitude" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ic_lat"
+            android:layout_width="@dimen/fixed_30"
+            android:layout_height="@dimen/fixed_30"
+            android:layout_marginTop="@dimen/margin_20"
+            android:src="@drawable/ic_map"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ic_long" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/latitude_title"
+            style="@style/regularText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_20"
+            android:text="@string/latitude"
+            android:textSize="@dimen/font_18"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/ic_lat"
+            app:layout_constraintStart_toEndOf="@id/ic_lat"
+            app:layout_constraintTop_toTopOf="@id/ic_lat" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/latitude"
+            style="@style/regularText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_20"
+            android:textSize="@dimen/font_16"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/latitude_title"
+            app:layout_constraintStart_toEndOf="@id/latitude_title"
+            app:layout_constraintTop_toTopOf="@id/latitude_title"
+            tools:text="latitude" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ic_condition"
+            android:layout_width="@dimen/fixed_50"
+            android:layout_height="@dimen/fixed_50"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ic_lat"
+            android:layout_marginTop="@dimen/margin_20"
+            android:src="@drawable/ic_cloud" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ic_forcast"
+            android:layout_width="@dimen/fixed_50"
+            android:layout_height="@dimen/fixed_50"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ic_condition"
+            android:src="@drawable/ic_forcast" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

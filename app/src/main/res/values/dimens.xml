@@ -23,6 +23,7 @@
     <dimen name="fixed_30">30dp</dimen>
     <dimen name="fixed_50">50dp</dimen>
     <dimen name="fixed_100">100dp</dimen>
+    <dimen name="fixed_150">150dp</dimen>
     <dimen name="fixed_300">300dp</dimen>
     <dimen name="fixed_500">500dp</dimen>
 </resources>

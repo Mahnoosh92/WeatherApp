@@ -12,11 +12,9 @@ interface HomeContract {
         fun hideLoader()
         fun showError(message: String)
         fun populateData(cities: List<City>?)
-        fun populateAutoCompleteData(cities:List<CityAutoComplete>?)
     }
 
     interface Presenter : BasePresenter<View> {
         fun getCities(size: Int, update: Boolean)
-        fun getAutoCompleteCities(city: Flowable<String>)
     }
 }

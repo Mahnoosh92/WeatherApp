@@ -1,14 +1,11 @@
 package com.mahdavi.weatherapp.ui.dashboard.home
 
 import com.mahdavi.weatherapp.data.model.local.ResultWrapper
-import com.mahdavi.weatherapp.data.model.local.cities.CityAutoComplete
 import com.mahdavi.weatherapp.data.repository.city.CityRepository
 import com.mahdavi.weatherapp.di.IoSchedulers
 import com.mahdavi.weatherapp.di.MainSchedulers
-import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class HomePresenter @Inject constructor(
@@ -38,30 +35,6 @@ class HomePresenter @Inject constructor(
                 }
             }, { onError ->
                 view?.showError(onError.message ?: "Something went wrong!")
-            }).also {
-                compositeDisposable.add(it)
-            }
-    }
-
-    override fun getAutoCompleteCities(city: Flowable<String>) {
-        city
-            .debounce(500, TimeUnit.MILLISECONDS)
-            .switchMap {
-                cityRepository.getAutoCompletedCities(it)
-            }
-            .subscribeOn(ioSchedulers)
-            .observeOn(mainSchedulers)
-            .subscribe({ result ->
-                when (result) {
-                    is ResultWrapper.Value -> {
-                        view?.populateAutoCompleteData(result.value)
-                    }
-                    is ResultWrapper.Error -> {
-                        view?.showError(result.error.message ?: "something went wrong")
-                    }
-                }
-            }, {
-                view?.showError(it.message ?: "something went wrong")
             }).also {
                 compositeDisposable.add(it)
             }

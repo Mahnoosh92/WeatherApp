@@ -10,6 +10,8 @@ interface DashboardContract {
         fun hideLoader()
         fun navigateToAuth()
         fun navigateToDetails(city: City)
+
+        fun openMobileLinkUrl(url:String)
     }
 
     interface Presenter : BasePresenter<View> {

@@ -58,16 +58,13 @@ class HomeFragment : BaseFragment(), HomeContract.View, ClickListener {
     }
 
     override fun setupListeners() {
-        binding.search?.getQueryTextChange()?.let {
-            presenter.getAutoCompleteCities(it)
-        }
+
     }
 
     override fun showLoader() {
         binding.apply {
             loading?.isVisible = true
             recyclerView?.isVisible = false
-            search?.isVisible = false
         }
     }
 
@@ -75,7 +72,6 @@ class HomeFragment : BaseFragment(), HomeContract.View, ClickListener {
         binding.apply {
             loading?.isVisible = false
             recyclerView?.isVisible = true
-            search?.isVisible = true
         }
     }
 
@@ -88,26 +84,18 @@ class HomeFragment : BaseFragment(), HomeContract.View, ClickListener {
         adapter.submitList(cities)
     }
 
-    override fun populateAutoCompleteData(cities: List<CityAutoComplete>?) {
-        val list = ArrayList<String>()
-        cities?.let {
-            it.map { cityAutoComplete ->
-                if (!list.contains(cityAutoComplete.localizedName))
-                    list.add(cityAutoComplete.localizedName)
-            }
-            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, list)
-            binding.search?.setAdapter(adapter)
-            adapter.setNotifyOnChange(true)
-            binding.search?.showDropDown()
-        }
-    }
-
     override fun onClick(city: City) {
         (requireActivity() as DashboardActivity).navigateToDetails(city)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        presenter.detachView(this)
         _binding = null
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.destroy()
     }
 }

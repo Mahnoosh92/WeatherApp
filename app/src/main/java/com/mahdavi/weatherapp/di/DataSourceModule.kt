@@ -6,6 +6,10 @@ import com.mahdavi.weatherapp.data.dataSource.remote.city.CityDataSource
 import com.mahdavi.weatherapp.data.dataSource.remote.city.DefaultCityDataSource
 import com.mahdavi.weatherapp.data.dataSource.remote.firebase.DefaultFirebaseDataSource
 import com.mahdavi.weatherapp.data.dataSource.remote.firebase.FirebaseDataSource
+import com.mahdavi.weatherapp.data.dataSource.remote.forecast.DefaultRemoteForecastDataSource
+import com.mahdavi.weatherapp.data.dataSource.remote.forecast.RemoteForecastDataSource
+import com.mahdavi.weatherapp.data.dataSource.remote.news.DefaultNewsRemoteDataSource
+import com.mahdavi.weatherapp.data.dataSource.remote.news.NewsRemoteDataSource
 import com.mahdavi.weatherapp.data.dataSource.remote.user.DefaultUserDataSource
 import com.mahdavi.weatherapp.data.dataSource.remote.user.UserDataSource
 import com.mahdavi.weatherapp.data.dataSource.remote.user.authentication.AuthDataSource
@@ -29,4 +33,10 @@ abstract class DataSourceModule {
 
     @Binds
     abstract fun bindCityLocalDataSource(defaultCityLocalDataSource: DefaultCityLocalDataSource): CityLocalDataSource
+
+    @Binds
+    abstract fun bindForecastRemoteDataSource(dfaultRemoteForecastDataSource: DefaultRemoteForecastDataSource): RemoteForecastDataSource
+
+    @Binds
+    abstract fun bindNewsRemoteDataSource(defaultNewsRemoteDataSource: DefaultNewsRemoteDataSource): NewsRemoteDataSource
 }

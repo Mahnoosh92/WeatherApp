@@ -1,23 +1,21 @@
 package com.mahdavi.weatherapp.ui.dashboard
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.google.android.material.navigation.NavigationBarView
 import com.mahdavi.weatherapp.MyApp
 import com.mahdavi.weatherapp.R
 import com.mahdavi.weatherapp.data.model.local.cities.City
 import com.mahdavi.weatherapp.databinding.ActivityDashboardBinding
 import com.mahdavi.weatherapp.ui.auth.AuthActivity
-
 import com.mahdavi.weatherapp.ui.base.BaseActivity
 import com.mahdavi.weatherapp.ui.dashboard.home.HomeFragment
 import com.mahdavi.weatherapp.ui.dashboard.news.NewsFragment
 import com.mahdavi.weatherapp.ui.dashboard.settings.SettingsFragment
 import com.mahdavi.weatherapp.ui.dashboard.weather.WeatherFragment
 import com.mahdavi.weatherapp.ui.details.DetailsActivity
-import com.mahdavi.weatherapp.utils.extensions.addFragment
 import com.mahdavi.weatherapp.utils.extensions.replaceFragment
 import javax.inject.Inject
 
@@ -104,5 +102,18 @@ class DashboardActivity : BaseActivity(), DashboardContract.View {
         val intent = Intent(this, DetailsActivity::class.java)
         intent.putExtra(DetailsActivity.KEY_CITY, city)
         startActivity(intent)
+    }
+
+    override fun openMobileLinkUrl(url: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        intent.setPackage("com.android.chrome")
+        try {
+            binding.root.context.startActivity(intent)
+        } catch (ex: ActivityNotFoundException) {
+            // Chrome browser presumably not installed so allow user to choose instead
+            intent.setPackage(null)
+            binding.root.context.startActivity(intent)
+        }
     }
 }

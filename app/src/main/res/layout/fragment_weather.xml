@@ -1,14 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.dashboard.weather.WeatherFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+        android:id="@+id/search"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="weather" />
+        android:layout_height="wrap_content"
+        android:hint="@string/country" />
 
-</FrameLayout>
+    <LinearLayout
+        android:id="@+id/forecastTypesContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/forecastTypes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:checkedChip="@id/OneDay"
+            app:selectionRequired="true"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/OneDay"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="@dimen/fixed_150"
+                android:layout_height="wrap_content"
+                android:text="@string/OneDayForecast"
+                app:chipBackgroundColor="@color/bg_chip" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/FiveDay"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="@dimen/fixed_150"
+                android:layout_height="wrap_content"
+                android:text="@string/FiveDayForecast"
+                app:chipBackgroundColor="@color/bg_chip" />
+        </com.google.android.material.chip.ChipGroup>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/forecast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/loading"
+        android:layout_width="@dimen/fixed_300"
+        android:layout_height="@dimen/fixed_300"
+        android:layout_gravity="center"
+        android:visibility="visible"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/cloudy_icon" />
+
+</LinearLayout>

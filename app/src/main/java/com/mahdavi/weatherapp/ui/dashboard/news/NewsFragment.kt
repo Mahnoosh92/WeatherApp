@@ -2,19 +2,21 @@ package com.mahdavi.weatherapp.ui.dashboard.news
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.mahdavi.weatherapp.R
+import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.mahdavi.weatherapp.data.model.local.news.Article
-import com.mahdavi.weatherapp.databinding.FragmentHomeBinding
 import com.mahdavi.weatherapp.databinding.FragmentNewsBinding
 import com.mahdavi.weatherapp.ui.base.BaseFragment
 import com.mahdavi.weatherapp.ui.dashboard.DashboardActivity
-import com.mahdavi.weatherapp.ui.dashboard.home.HomeContract
+import com.mahdavi.weatherapp.ui.dashboard.news.adapter.NewsAdapter
 import com.mahdavi.weatherapp.utils.extensions.shortSnackBar
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.processors.PublishProcessor
 import javax.inject.Inject
 
 
@@ -27,8 +29,18 @@ class NewsFragment : BaseFragment(), NewsContract.View {
         CompositeDisposable()
     }
 
+    private val newsAdapter: NewsAdapter = NewsAdapter()
+    private lateinit var layoutManager: LinearLayoutManager
+
     private var _binding: FragmentNewsBinding? = null
     private val binding get() = _binding!!
+
+    private var page = 1
+    private var totalItem = 0
+    private var lastVisibleItem = 0
+    private val visibleThreshold = 1
+    private val paginator = PublishProcessor.create<Int>()
+    private var loading = false
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (requireActivity() as DashboardActivity).dashboardComponent.inject(this)
@@ -43,7 +55,8 @@ class NewsFragment : BaseFragment(), NewsContract.View {
     }
 
     override fun setupUi() {
-        /*NO_OP*/
+        layoutManager = binding.news.layoutManager as LinearLayoutManager
+        presenter.getNews(page_size = page)
     }
 
     override fun registerView() {
@@ -51,19 +64,45 @@ class NewsFragment : BaseFragment(), NewsContract.View {
     }
 
     override fun setupSubscribers() {
-        /*NO_OP*/
+        paginator
+            .onBackpressureDrop()
+            .doOnNext { page: Int? ->
+                page?.let {
+                    presenter.getNews(page_size = page)
+                }
+            }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe().also {
+                compositeDisposable.add(it)
+            }
     }
 
     override fun setupListeners() {
-        /*NO_OP*/
+        binding.news.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                totalItem = layoutManager.itemCount
+                lastVisibleItem = layoutManager.findLastVisibleItemPosition()
+                if (!loading && totalItem <= (lastVisibleItem + visibleThreshold)) {
+                    page++
+                    paginator.onNext(page)
+                }
+            }
+        })
     }
 
     override fun showLoader() {
-        /*NO_OP*/
+        loading = true
+        binding.apply {
+            loading.isVisible = true
+        }
     }
 
     override fun hideLoader() {
-        /*NO_OP*/
+        loading = false
+        binding.apply {
+            loading.isVisible = false
+        }
     }
 
     override fun showError(message: String) {
@@ -71,7 +110,8 @@ class NewsFragment : BaseFragment(), NewsContract.View {
     }
 
     override fun populateNews(news: List<Article>) {
-
+        newsAdapter.addItems(news)
+        binding.news.adapter = newsAdapter
     }
 
     override fun onDestroyView() {

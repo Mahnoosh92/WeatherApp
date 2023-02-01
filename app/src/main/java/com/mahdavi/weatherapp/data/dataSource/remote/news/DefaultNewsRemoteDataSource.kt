@@ -10,6 +10,6 @@ import javax.inject.Inject
 
 class DefaultNewsRemoteDataSource @Inject constructor(@NewsApiService private val apiNewsService: ApiNewsService) :
     NewsRemoteDataSource {
-    override fun getNews(page_size: Int): Single<Response<RemoteNews>> =
-        apiNewsService.getNews(page_size = page_size)
+    override fun getNews(page: Int): Single<Response<RemoteNews>> =
+        apiNewsService.getNews(page = page)
 }

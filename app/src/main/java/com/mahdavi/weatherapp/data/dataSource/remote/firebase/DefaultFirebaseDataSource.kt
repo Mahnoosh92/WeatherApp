@@ -14,5 +14,4 @@ class DefaultFirebaseDataSource @Inject constructor() : FirebaseDataSource {
             throw e
         }
     }
-
 }

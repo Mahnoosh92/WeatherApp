@@ -21,4 +21,8 @@ object PersistenceModule {
     @Provides
     @Singleton
     fun provideCityDao(db: AppDataBase) = db.cityDao()
+
+    @Provides
+    @Singleton
+    fun provideArticleDao(db: AppDataBase) = db.articleDao()
 }

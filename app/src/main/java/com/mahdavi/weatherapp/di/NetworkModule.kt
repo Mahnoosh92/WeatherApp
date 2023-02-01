@@ -2,6 +2,7 @@ package com.mahdavi.weatherapp.di
 
 import com.mahdavi.weatherapp.BuildConfig
 import com.mahdavi.weatherapp.BuildConfig.BASE_URL
+import com.mahdavi.weatherapp.data.api.ApiNewsService
 import com.mahdavi.weatherapp.data.api.ApiService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -109,7 +110,7 @@ object NetworkModule {
     @Provides
     @Singleton
     @NewsApiService
-    fun provideNewsApiService(@NewsRetrofit retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
+    fun provideNewsApiService(@NewsRetrofit retrofit: Retrofit): ApiNewsService = retrofit.create(ApiNewsService::class.java)
 }
 
 @Qualifier

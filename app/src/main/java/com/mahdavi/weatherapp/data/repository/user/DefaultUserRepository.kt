@@ -13,6 +13,4 @@ class DefaultUserRepository @Inject constructor(private val userDataSource: User
     override fun getUserAuthState(): Single<Boolean> = userDataSource.getUserAuthState()
 
     override fun signOut(): Completable = userDataSource.signOut()
-
-
 }

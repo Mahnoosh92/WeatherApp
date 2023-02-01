@@ -8,7 +8,7 @@ data class RemoteArticle(
     @Json(name = "_id") val id: String?,
     @Json(name = "_score") val score: Double?,
     @Json(name = "author") val author: String?,
-    @Json(name = "authors") val authors: List<String>?,
+    @Json(name = "authors") val authors: String?,
     @Json(name = "clean_url") val clean_url: String?,
     @Json(name = "country") val country: String?,
     @Json(name = "excerpt") val excerpt: String?,

@@ -9,9 +9,10 @@ import retrofit2.http.Query
 interface ApiNewsService {
     @GET("search")
     fun getNews(
-        @Query("page_size") page_size: Int,
-        @Query("q") topic: String="Apple",
-        @Query("from") from: String="2021/12/15",
-        @Query("countries") countries: String="CA",
+        @Query("page_size") page_size: Int = 25,
+        @Query("page") page: Int,
+        @Query("q") topic: String = "apple",
+//        @Query("from") from: String="2021/12/15",
+        @Query("countries") countries: String = "CA",
     ): Single<Response<RemoteNews>>
 }

@@ -7,5 +7,5 @@ import java.lang.Exception
 
 interface NewsRepository {
 
-    fun getNews(page_size: Int): Flowable<ResultWrapper<Exception, List<Article>?>>
+    fun getNews(page: Int, update:Boolean): Flowable<ResultWrapper<Exception, List<Article>?>>
 }

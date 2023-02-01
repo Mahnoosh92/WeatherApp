@@ -5,5 +5,5 @@ import io.reactivex.rxjava3.core.Single
 import retrofit2.Response
 
 interface NewsRemoteDataSource {
-    fun getNews(page_size: Int): Single<Response<RemoteNews>>
+    fun getNews(page: Int): Single<Response<RemoteNews>>
 }

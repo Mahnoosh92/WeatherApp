@@ -26,7 +26,9 @@ class NewsPresenter @Inject constructor(
                 when (result) {
                     is ResultWrapper.Value -> {
                         view?.hideLoader()
-                        result.value?.let { view?.populateNews(it) }
+                        result.value?.let {
+                            view?.populateNews(it)
+                        }
                     }
                     is ResultWrapper.Error -> {
                         view?.showError(result.error.message ?: "something went wrong!")

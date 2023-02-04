@@ -1,6 +1,7 @@
 package com.mahdavi.weatherapp.data.dataSource.remote.city
 
 import com.mahdavi.weatherapp.data.api.ApiService
+import com.mahdavi.weatherapp.data.model.local.cities.City
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -16,7 +17,6 @@ internal class DefaultCityDataSourceTest {
 
     @Mock
     private lateinit var apiService: ApiService
-
     private lateinit var dataSource: DefaultCityDataSource
 
     @Before
@@ -36,5 +36,13 @@ internal class DefaultCityDataSourceTest {
 
         // Then
         Mockito.verify(apiService, times(1)).getTopCities(anyInt())
+    }
+    @Test
+    fun `test getAutoCompletedCities`() {
+        // When
+        dataSource.getAutoCompletedCities(city="")
+
+        // Then
+        Mockito.verify(apiService, times(1)).getAutoCompletedCities(city = "")
     }
 }

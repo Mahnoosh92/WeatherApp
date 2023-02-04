@@ -20,7 +20,8 @@ import javax.inject.Singleton
         StorageModule::class,
         NetworkModule::class,
         ThreadingModule::class,
-        AppSubcomponents::class
+        AppSubcomponents::class,
+        FirebaseModule::class
     ]
 )
 interface AppComponent {

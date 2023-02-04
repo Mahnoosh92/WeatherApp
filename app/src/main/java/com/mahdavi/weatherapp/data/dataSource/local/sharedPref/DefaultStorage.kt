@@ -22,6 +22,7 @@ class DefaultStorage @Inject constructor(context: Context) : Storage {
     }
 
     override fun getString(key: String): Preference<String> {
-        return rxPreferences.getString(key)
+        val result = rxPreferences.getString(key)
+        return result
     }
 }

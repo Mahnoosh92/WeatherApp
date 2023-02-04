@@ -5,11 +5,8 @@ import com.mahdavi.weatherapp.data.dataSource.remote.city.CityDataSource
 import com.mahdavi.weatherapp.data.model.local.ResultWrapper
 import com.mahdavi.weatherapp.data.model.local.cities.City
 import com.mahdavi.weatherapp.data.model.local.cities.CityAutoComplete
-import com.mahdavi.weatherapp.data.model.remote.cities.RemoteCity
-import com.mahdavi.weatherapp.utils.extensions.getApiError
-import io.reactivex.rxjava3.core.Completable
+import com.mahdavi.weatherapp.utils.extensions.getApiErrorWeather
 import io.reactivex.rxjava3.core.Flowable
-import io.reactivex.rxjava3.processors.PublishProcessor
 import javax.inject.Inject
 
 class DefaultCityRepository @Inject constructor(
@@ -26,7 +23,7 @@ class DefaultCityRepository @Inject constructor(
                     if (!response.isSuccessful) {
                         ResultWrapper.build {
                             throw Exception(
-                                response.getApiError()?.message ?: "Something went wrong"
+                                response.getApiErrorWeather()?.message ?: "Something went wrong"
                             )
                         }
                     }
@@ -44,7 +41,8 @@ class DefaultCityRepository @Inject constructor(
                                     cityEntity.toCity()
                                 }
                             }
-                        })
+                        }
+                    )
                 }
         } else {
             localDataSource.getCities()
@@ -63,7 +61,7 @@ class DefaultCityRepository @Inject constructor(
             .map { response ->
                 if (response.isSuccessful.not()) {
                     ResultWrapper.build {
-                        throw Exception(response.getApiError()?.message)
+                        throw Exception(response.getApiErrorWeather()?.message)
                     }
                 }
                 response.body() ?: throw throw Exception("Response is null")

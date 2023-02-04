@@ -25,10 +25,6 @@ class NewsFragment : BaseFragment(), NewsContract.View {
     @Inject
     lateinit var presenter: NewsContract.Presenter
 
-    private val compositeDisposable: CompositeDisposable by lazy {
-        CompositeDisposable()
-    }
-
     private val newsAdapter: NewsAdapter = NewsAdapter()
     private lateinit var layoutManager: LinearLayoutManager
 
@@ -39,7 +35,6 @@ class NewsFragment : BaseFragment(), NewsContract.View {
     private var totalItem = 0
     private var lastVisibleItem = 0
     private val visibleThreshold = 1
-    private val paginator = PublishProcessor.create<Int>()
     private var loading = false
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -56,6 +51,7 @@ class NewsFragment : BaseFragment(), NewsContract.View {
 
     override fun setupUi() {
         layoutManager = binding.news.layoutManager as LinearLayoutManager
+        binding.news.adapter = newsAdapter
         presenter.getNews(page_size = page)
     }
 
@@ -64,17 +60,6 @@ class NewsFragment : BaseFragment(), NewsContract.View {
     }
 
     override fun setupSubscribers() {
-        paginator
-            .onBackpressureDrop()
-            .doOnNext { page: Int? ->
-                page?.let {
-                    presenter.getNews(page_size = page)
-                }
-            }
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe().also {
-                compositeDisposable.add(it)
-            }
     }
 
     override fun setupListeners() {
@@ -85,7 +70,7 @@ class NewsFragment : BaseFragment(), NewsContract.View {
                 lastVisibleItem = layoutManager.findLastVisibleItemPosition()
                 if (!loading && totalItem <= (lastVisibleItem + visibleThreshold)) {
                     page++
-                    paginator.onNext(page)
+                    presenter.getNews(page_size = page)
                 }
             }
         })
@@ -93,16 +78,13 @@ class NewsFragment : BaseFragment(), NewsContract.View {
 
     override fun showLoader() {
         loading = true
-        binding.apply {
-            loading.isVisible = true
-        }
+        binding.loading.isVisible = true
+
     }
 
     override fun hideLoader() {
         loading = false
-        binding.apply {
-            loading.isVisible = false
-        }
+        binding.loading.isVisible = false
     }
 
     override fun showError(message: String) {
@@ -111,7 +93,6 @@ class NewsFragment : BaseFragment(), NewsContract.View {
 
     override fun populateNews(news: List<Article>) {
         newsAdapter.addItems(news)
-        binding.news.adapter = newsAdapter
     }
 
     override fun onDestroyView() {
@@ -123,6 +104,5 @@ class NewsFragment : BaseFragment(), NewsContract.View {
         super.onDestroy()
         presenter.destroy()
         _binding = null
-        compositeDisposable.clear()
     }
 }

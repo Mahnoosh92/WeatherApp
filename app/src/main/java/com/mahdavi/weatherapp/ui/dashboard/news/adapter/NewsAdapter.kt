@@ -16,34 +16,26 @@ class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     fun addItems(items: List<Article>) {
-        data.addAll(items)
-        notifyDataSetChanged()
+        val size = this.data.size
+        this.data.addAll(items)
+        val sizeNew = this.data.size
+        notifyItemRangeChanged(size, sizeNew)
     }
 
     override fun getItemCount(): Int = data.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as ArticleViewHolder).bind(data[position])
+        (holder as ArticleViewHolder).bind(data[position], position)
     }
 
     inner class ArticleViewHolder(private val binding: NewsItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(article: Article) {
+        fun bind(article: Article, index: Int) {
             binding.apply {
-
-                articleText.text = article.author
+                //articleText.text = article.author
+                articleText.text = index.toString()
             }
         }
     }
 }
-
-//class PersonDiffUtil : DiffUtil.ItemCallback<Article>() {
-//    override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
-//        return oldItem.id == newItem.id
-//    }
-//
-//    override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
-//        return oldItem == newItem
-//    }
-//}

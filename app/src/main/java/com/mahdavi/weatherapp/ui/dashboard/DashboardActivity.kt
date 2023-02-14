@@ -4,6 +4,7 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.navigation.NavigationBarView
 import com.mahdavi.weatherapp.MyApp
 import com.mahdavi.weatherapp.R
@@ -20,7 +21,7 @@ import com.mahdavi.weatherapp.utils.extensions.replaceFragment
 import javax.inject.Inject
 
 
-class DashboardActivity : BaseActivity(), DashboardContract.View {
+class DashboardActivity : AppCompatActivity(), DashboardContract.View {
 
     private lateinit var binding: ActivityDashboardBinding
     lateinit var dashboardComponent: DashboardComponent
@@ -49,18 +50,6 @@ class DashboardActivity : BaseActivity(), DashboardContract.View {
             }
         }
         false
-    }
-
-    override fun setupUi() {
-
-    }
-
-    override fun setupSubscribers() {
-
-    }
-
-    override fun setupListeners() {
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

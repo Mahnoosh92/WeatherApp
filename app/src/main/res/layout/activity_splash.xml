@@ -6,12 +6,11 @@
     android:layout_height="match_parent"
     android:gravity="center"
     tools:context=".ui.splash.SplashActivity">
+
     <com.airbnb.lottie.LottieAnimationView
         android:layout_width="@dimen/fixed_500"
         android:layout_height="@dimen/fixed_500"
-        app:lottie_rawRes="@raw/day_night"
-        app:lottie_loop="true"
         app:lottie_autoPlay="true"
-
-        />
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/day_night" />
 </LinearLayout>

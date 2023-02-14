@@ -16,8 +16,7 @@ class SplashPresenter @Inject constructor(
     private val userRepository: UserRepository,
     @IoSchedulers private val ioScheduler: Scheduler,
     @MainSchedulers private val mainScheduler: Scheduler
-) :
-    SplashContract.Presenter {
+) : SplashContract.Presenter {
 
     private val compositeDisposable = CompositeDisposable()
     private var view: SplashContract.View? = null
@@ -34,7 +33,7 @@ class SplashPresenter @Inject constructor(
             .subscribeOn(ioScheduler)
             .observeOn(mainScheduler)
             .subscribe({ state ->
-                if (state){
+                if (state) {
                     view?.navigateToDashboard()
                 } else {
                     view?.navigateToAuth()

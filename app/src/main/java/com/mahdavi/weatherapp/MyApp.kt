@@ -4,7 +4,7 @@ import android.app.Application
 import com.mahdavi.weatherapp.di.AppComponent
 import com.mahdavi.weatherapp.di.DaggerAppComponent
 
-class MyApp:Application() {
+open class MyApp : Application() {
 
     val appComponent: AppComponent by lazy {
         initializeComponent()

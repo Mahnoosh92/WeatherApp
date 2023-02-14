@@ -2,6 +2,7 @@ package com.mahdavi.weatherapp.ui.auth
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.mahdavi.weatherapp.MyApp
 import com.mahdavi.weatherapp.databinding.ActivityAuthBinding
 import com.mahdavi.weatherapp.ui.auth.login.LoginFragment
@@ -12,25 +13,13 @@ import com.mahdavi.weatherapp.utils.extensions.addFragment
 import com.mahdavi.weatherapp.utils.extensions.replaceFragment
 import javax.inject.Inject
 
-class AuthActivity : BaseActivity(), AuthContract.View {
-    lateinit var authComponent: AuthComponent
+class AuthActivity : AppCompatActivity(), AuthContract.View {
 
-    lateinit var binding: ActivityAuthBinding
+    lateinit var authComponent: AuthComponent
+    private lateinit var binding: ActivityAuthBinding
 
     @Inject
     lateinit var presenter: AuthContract.Presenter
-
-    override fun setupUi() {
-
-    }
-
-    override fun setupSubscribers() {
-
-    }
-
-    override fun setupListeners() {
-
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as MyApp).appComponent.authComponent().create().inject(this)

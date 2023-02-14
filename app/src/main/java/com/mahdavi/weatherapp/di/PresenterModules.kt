@@ -55,6 +55,4 @@ abstract class PresenterModules {
 
     @Binds
     abstract fun bindDetailsPresenter(detailsPresenter: DetailsPresenter): DetailsContract.Presenter
-
-
 }

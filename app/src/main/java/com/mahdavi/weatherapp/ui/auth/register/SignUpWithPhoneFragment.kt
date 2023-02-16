@@ -71,7 +71,7 @@ class SignUpWithPhoneFragment : BaseFragment(), SignUpWithPhoneContract.View {
     }
 
     override fun setupUi() {
-
+        /*NO_OP*/
     }
 
     override fun registerView() {
@@ -116,7 +116,7 @@ class SignUpWithPhoneFragment : BaseFragment(), SignUpWithPhoneContract.View {
     }
 
     override fun setupListeners() {
-
+        /*NO_OP*/
     }
 
     private fun verifyVerificationCode(code: String) {
@@ -133,11 +133,11 @@ class SignUpWithPhoneFragment : BaseFragment(), SignUpWithPhoneContract.View {
     }
 
     override fun showLoader() {
-
+        /*NO_OP*/
     }
 
     override fun hideLoader() {
-
+        /*NO_OP*/
     }
 
     override fun navigateToHome() {
@@ -160,6 +160,8 @@ class SignUpWithPhoneFragment : BaseFragment(), SignUpWithPhoneContract.View {
 
     override fun onDestroy() {
         super.onDestroy()
+        presenter.detachView(this)
+        presenter.destroy()
         compositeDisposable.clear()
     }
 }

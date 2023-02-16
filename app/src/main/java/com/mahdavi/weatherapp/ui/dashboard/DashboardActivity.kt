@@ -66,19 +66,14 @@ class DashboardActivity : AppCompatActivity(), DashboardContract.View {
             setSupportActionBar(toolbar)
             bottomNavView.setOnItemSelectedListener(mOnItemSelectedListener)
         }
-        manageFragments()
-    }
-
-    private fun manageFragments() {
-
     }
 
     override fun showLoader() {
-
+        /*NO_OP*/
     }
 
     override fun hideLoader() {
-
+        /*NO_OP*/
     }
 
     override fun navigateToAuth() {
@@ -104,5 +99,11 @@ class DashboardActivity : AppCompatActivity(), DashboardContract.View {
             intent.setPackage(null)
             binding.root.context.startActivity(intent)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.detachView(this)
+        presenter.destroy()
     }
 }

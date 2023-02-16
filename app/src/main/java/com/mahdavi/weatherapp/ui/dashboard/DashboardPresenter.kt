@@ -6,7 +6,7 @@ class DashboardPresenter @Inject constructor() : DashboardContract.Presenter {
 
     private var view: DashboardContract.View? = null
     override fun detachView(view: DashboardContract.View) {
-
+        this.view = null
     }
 
     override fun attachView(view: DashboardContract.View) {
@@ -14,6 +14,6 @@ class DashboardPresenter @Inject constructor() : DashboardContract.Presenter {
     }
 
     override fun destroy() {
-
+        /*NO_OP*/
     }
 }

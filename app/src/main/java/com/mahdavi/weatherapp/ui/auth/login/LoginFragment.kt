@@ -9,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.tabs.TabLayoutMediator
+import com.mahdavi.weatherapp.R
 
 
 import com.mahdavi.weatherapp.databinding.FragmentLoginBinding
@@ -17,6 +19,8 @@ import com.mahdavi.weatherapp.ui.auth.AuthActivity
 import com.mahdavi.weatherapp.ui.auth.login.adapter.LoginPageAdapter
 import com.mahdavi.weatherapp.ui.base.BaseFragment
 import com.mahdavi.weatherapp.utils.extensions.observableClickListener
+import com.mahdavi.weatherapp.utils.extensions.shortSnackBar
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import javax.inject.Inject
 
 
@@ -26,7 +30,7 @@ class LoginFragment : BaseFragment(), LoginContract.View {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
-
+    private val compositeDisposable = CompositeDisposable()
     private val resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -41,8 +45,7 @@ class LoginFragment : BaseFragment(), LoginContract.View {
     lateinit var presenter: LoginContract.Presenter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
@@ -74,37 +77,47 @@ class LoginFragment : BaseFragment(), LoginContract.View {
     }
 
     override fun setupListeners() {
-        this.binding.createAccount.observableClickListener().subscribe(
-            { onNext ->
-                (activity as AuthActivity).navigateToLoginWithPhone()
-            },
-            { onError ->
+        this.binding.createAccount.observableClickListener().subscribe({ onNext ->
+            (activity as AuthActivity).navigateToLoginWithPhone()
+        }, { onError ->
 
-            },
-            {
+        }, {
 
+        }).also {
+            compositeDisposable.add(it)
+        }
+        binding.apply {
+            googleAccount.setOnClickListener {
+                val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestIdToken(getString(R.string.web_client_id))
+                    .requestEmail().build()
+                val googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
+                val signInIntent = googleSignInClient.signInIntent
+                resultLauncher.launch(signInIntent)
             }
-        )
-//        binding.apply {
-//            googleAccount.setOnClickListener {
-//                val gso = GoogleSignInOptions
-//                    .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//                    .requestIdToken("579984903878-ulr5bvaqgd2d54oe33dhg6gutd135m7f.apps.googleusercontent.com")
-//                    .requestEmail()
-//                    .build()
-//                val googleSignInClient =
-//                    GoogleSignIn.getClient(requireActivity(), gso)
-//                val signInIntent = googleSignInClient.signInIntent
-//                resultLauncher.launch(signInIntent)
-//            }
-//        }
+        }
     }
 
     override fun showLoader() {
-
+        /*NO_OP*/
     }
 
     override fun hideLoader() {
+        /*NO_OP*/
+    }
 
+    override fun showError(message: String) {
+        binding.root.shortSnackBar(message)
+    }
+
+    override fun navigateToDashboard() {
+        (activity as AuthActivity).navigateToHome()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.detachView(this)
+        presenter.destroy()
+        compositeDisposable.clear()
     }
 }

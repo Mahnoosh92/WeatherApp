@@ -30,27 +30,26 @@ class SplashActivity : BaseActivity(), SplashContract.View {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
         presenter.attachView(this)
-
     }
 
     override fun setupUi() {
-       presenter.getUserStatus()
+        presenter.getUserStatus()
     }
 
     override fun setupSubscribers() {
-
+        /*NO_OP*/
     }
 
     override fun setupListeners() {
-
+        /*NO_OP*/
     }
 
     override fun showLoader() {
-
+        /*NO_OP*/
     }
 
     override fun hideLoader() {
-
+        /*NO_OP*/
     }
 
     override fun navigateToAuth() {

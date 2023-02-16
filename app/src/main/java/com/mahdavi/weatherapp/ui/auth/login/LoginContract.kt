@@ -10,6 +10,9 @@ interface LoginContract {
     interface View : BaseView {
         fun showLoader()
         fun hideLoader()
+
+        fun showError(message: String)
+        fun navigateToDashboard()
     }
 
     interface Presenter : BasePresenter<View> {

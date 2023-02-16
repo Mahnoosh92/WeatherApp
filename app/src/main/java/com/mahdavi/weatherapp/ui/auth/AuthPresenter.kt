@@ -10,7 +10,7 @@ class AuthPresenter @Inject constructor() : AuthContract.Presenter {
     }
 
     override fun detachView(view: AuthContract.View) {
-        this.view = view
+        this.view = null
     }
 
     override fun attachView(view: AuthContract.View) {
@@ -18,6 +18,6 @@ class AuthPresenter @Inject constructor() : AuthContract.Presenter {
     }
 
     override fun destroy() {
-
+        /*NO_OP*/
     }
 }

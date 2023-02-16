@@ -32,8 +32,6 @@ class DetailsActivity : BaseActivity(), DetailsContract.View {
     }
 
     override fun setupUi() {
-//        setSupportActionBar(binding.toolbar)
-        presenter.setUpLoader(true)
         populateDetails()
     }
 
@@ -43,16 +41,16 @@ class DetailsActivity : BaseActivity(), DetailsContract.View {
         } else {
             intent.getParcelableExtra(KEY_CITY)
         }
+        presenter.setUpLoader(false)
         binding.apply {
             countryValue.text = city?.country
             englishNameValue.text = city?.englishName
             populstionValue.text = city?.details?.population.toString()
-            presenter.setUpLoader(false)
         }
     }
 
     override fun setupSubscribers() {
-
+        /*NO_OP*/
     }
 
     override fun setupListeners() {
@@ -61,7 +59,7 @@ class DetailsActivity : BaseActivity(), DetailsContract.View {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
-
+                finish()
             }.also {
                 compositeDesposable.add(it)
             }
@@ -91,6 +89,12 @@ class DetailsActivity : BaseActivity(), DetailsContract.View {
     }
 
     override fun showError(message: String) {
+        /*NO_OP*/
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.detachView(this)
+        presenter.destroy()
     }
 }

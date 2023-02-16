@@ -6,41 +6,53 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.GoogleAuthProvider
 import com.mahdavi.weatherapp.data.repository.user.authentication.AuthRepository
+import com.mahdavi.weatherapp.di.IoSchedulers
+import com.mahdavi.weatherapp.di.MainSchedulers
+import io.reactivex.rxjava3.core.Scheduler
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import javax.inject.Inject
 
-class LoginPresenter @Inject constructor(private val authGoogleRepository: AuthRepository) :
+class LoginPresenter @Inject constructor(
+    private val authGoogleRepository: AuthRepository,
+    @IoSchedulers private val ioScheduler: Scheduler,
+    @MainSchedulers private val mainScheduler: Scheduler,
+) :
     LoginContract.Presenter {
 
+    private var view: LoginContract.View? = null
+    private var compositeDisposable = CompositeDisposable()
     override fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
-//        try {
-//            val account = completedTask.getResult(ApiException::class.java)
-//            val firebaseCredential = GoogleAuthProvider.getCredential(account.idToken, null)
-//            authGoogleRepository.signInWithCredential(firebaseCredential).subscribe(
-//                {
-//                },
-//                { onError ->
-//
-//                })
-//            val xx = 1
-//            // Signed in successfully, show authenticated UI.
-//            // TODO
-//        } catch (e: ApiException) {
-//            // The ApiException status code indicates the detailed failure reason.
-//            // Please refer to the GoogleSignInStatusCodes class reference for more information.
-//            Log.w("error", "signInResult:failed code=" + e.statusCode)
-//            //TODO
-//        }
+        try {
+            val account = completedTask.getResult(ApiException::class.java)
+            firebaseAuthWithGoogle(account)
+        } catch (e: ApiException) {
+            view?.showError(e.message ?: "something went wrong with firebase")
+        }
+    }
+
+    private fun firebaseAuthWithGoogle(account: GoogleSignInAccount) {
+        authGoogleRepository.signInWithCredential(account)
+            .subscribeOn(ioScheduler)
+            .observeOn(mainScheduler)
+            .subscribe({
+                view?.navigateToDashboard()
+            }, {
+                view?.showError(it.message ?: "something went wrong with firebase")
+            }).also {
+                compositeDisposable.add(it)
+            }
+
     }
 
     override fun detachView(view: LoginContract.View) {
-
+        this.view = null
     }
 
     override fun attachView(view: LoginContract.View) {
-
+        this.view = view
     }
 
     override fun destroy() {
-
+        compositeDisposable.clear()
     }
 }

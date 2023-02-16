@@ -22,8 +22,8 @@ class AuthActivity : AppCompatActivity(), AuthContract.View {
     lateinit var presenter: AuthContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (application as MyApp).appComponent.authComponent().create().inject(this)
         authComponent = (application as MyApp).appComponent.authComponent().create()
+        authComponent.inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -32,15 +32,15 @@ class AuthActivity : AppCompatActivity(), AuthContract.View {
     }
 
     override fun showLoader() {
-
+        /*NO_OP*/
     }
 
     override fun hideLoader() {
-
+        /*NO_OP*/
     }
 
     override fun navigateToRegister() {
-
+        /*NO_OP*/
     }
 
     override fun navigateToLoginWithPhone() {
@@ -55,5 +55,11 @@ class AuthActivity : AppCompatActivity(), AuthContract.View {
         val intent = Intent(this, DashboardActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.detachView(this)
+        presenter.destroy()
     }
 }

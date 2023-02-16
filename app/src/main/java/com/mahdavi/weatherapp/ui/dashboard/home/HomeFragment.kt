@@ -58,7 +58,7 @@ class HomeFragment : BaseFragment(), HomeContract.View, ClickListener {
     }
 
     override fun setupListeners() {
-
+        /* NO-OP */
     }
 
     override fun showLoader() {

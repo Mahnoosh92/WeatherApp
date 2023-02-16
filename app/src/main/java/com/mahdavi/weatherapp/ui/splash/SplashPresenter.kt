@@ -18,8 +18,8 @@ class SplashPresenter @Inject constructor(
     @MainSchedulers private val mainScheduler: Scheduler
 ) : SplashContract.Presenter {
 
-    private val compositeDisposable = CompositeDisposable()
     private var view: SplashContract.View? = null
+    private val compositeDisposable = CompositeDisposable()
 
     @SuppressLint("CheckResult")
     override fun getUserStatus() {

@@ -11,7 +11,7 @@ class DetailsPresenter @Inject constructor() : DetailsContract.Presenter {
     private var view: DetailsContract.View? = null
     private val compositeDisposable = CompositeDisposable()
     override fun setUpLoader(loader: Boolean) {
-        Flowable.timer(300, TimeUnit.MILLISECONDS)
+        Flowable.timer(500, TimeUnit.MILLISECONDS)
             .flatMap {
                 Flowable.just(true)
             }

@@ -3,6 +3,7 @@ package com.mahdavi.weatherapp.ui.dashboard
 import com.mahdavi.weatherapp.di.ActivityScope
 import com.mahdavi.weatherapp.ui.dashboard.home.HomeFragment
 import com.mahdavi.weatherapp.ui.dashboard.news.NewsFragment
+import com.mahdavi.weatherapp.ui.dashboard.weather.search.SearchFragment
 import com.mahdavi.weatherapp.ui.dashboard.settings.SettingsFragment
 import com.mahdavi.weatherapp.ui.dashboard.weather.WeatherFragment
 import dagger.Subcomponent
@@ -20,4 +21,5 @@ interface DashboardComponent {
     fun inject(fragment: WeatherFragment)
     fun inject(fragment: NewsFragment)
     fun inject(fragment: SettingsFragment)
+    fun inject(fragment: SearchFragment)
 }

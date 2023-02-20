@@ -7,45 +7,46 @@
     android:orientation="vertical"
     tools:context=".ui.dashboard.weather.WeatherFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/search"
+        android:layout_marginTop="@dimen/margin_20"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/country" />
+        android:layout_marginHorizontal="@dimen/margin_10"
+        android:elevation="@dimen/elevation_10"
+        app:cardCornerRadius="@dimen/radius_12">
 
-    <LinearLayout
-        android:id="@+id/forecastTypesContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:visibility="gone">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/forecastTypes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:checkedChip="@id/OneDay"
-            app:selectionRequired="true"
-            app:singleSelection="true">
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/OneDay"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="@dimen/fixed_150"
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/search_image_view"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/OneDayForecast"
-                app:chipBackgroundColor="@color/bg_chip" />
+                android:layout_marginStart="16dp"
+                android:src="@android:drawable/ic_menu_search"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/FiveDay"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="@dimen/fixed_150"
+                tools:ignore="ContentDescription"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/search_edit_text"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/FiveDayForecast"
-                app:chipBackgroundColor="@color/bg_chip" />
-        </com.google.android.material.chip.ChipGroup>
-    </LinearLayout>
+                android:hint="City"
+                android:layout_marginStart="62dp"
+                android:paddingVertical="@dimen/padding_20"
+                android:background="@android:color/transparent"
+                app:layout_constraintStart_toEndOf="@+id/search_image_view"
+                app:layout_constraintTop_toTopOf="@+id/search_image_view"
+                app:layout_constraintBottom_toBottomOf="@+id/search_image_view"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/forecast"
@@ -54,14 +55,14 @@
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/loading"
-        android:layout_width="@dimen/fixed_300"
-        android:layout_height="@dimen/fixed_300"
-        android:layout_gravity="center"
-        android:visibility="visible"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/cloudy_icon" />
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/loading"
+            android:layout_width="@dimen/fixed_300"
+            android:layout_height="@dimen/fixed_300"
+            android:layout_gravity="center"
+            android:visibility="visible"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/cloudy_icon" />
 
 </LinearLayout>

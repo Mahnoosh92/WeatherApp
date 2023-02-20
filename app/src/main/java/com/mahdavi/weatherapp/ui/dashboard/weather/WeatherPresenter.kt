@@ -28,43 +28,8 @@ class WeatherPresenter @Inject constructor(
     override fun detachView(view: WeatherContract.View) {
         this.view = null
     }
-
-    override fun getAutoCompleteCities(city: Flowable<String>) {
-        city.observeOn(mainSchedulers)
-            .filter {
-                if (it.isEmpty()) {
-                    view?.hideChips()
-                    view?.showLoader()
-                }
-                it.isNotEmpty()
-            }
-            .observeOn(ioSchedulers)
-            .debounce(300, TimeUnit.MILLISECONDS)
-            .switchMap {
-                cityRepository.getAutoCompletedCities(it)
-            }
-            .subscribeOn(ioSchedulers)
-            .observeOn(mainSchedulers)
-            .subscribe({ result ->
-                when (result) {
-                    is ResultWrapper.Value -> {
-                        view?.showChips()
-                        view?.hideLoader()
-                        view?.populateAutoCompleteData(result.value)
-                    }
-                    is ResultWrapper.Error -> {
-                        view?.hideChips()
-                        view?.showError(result.error.message ?: "something went wrong")
-                    }
-                }
-            }, {
-                view?.showError(it.message ?: "something went wrong")
-            }).also {
-                compositeDisposable.add(it)
-            }
-    }
-
     override fun getForecastData(key: String, type: Int) {
+        view?.showLoader()
         if (type == 0) {
             forecastRepository.getOneDayForecast(key)
                 .subscribeOn(ioSchedulers)
@@ -73,31 +38,18 @@ class WeatherPresenter @Inject constructor(
                     view?.hideLoader()
                     when (result) {
                         is ResultWrapper.Value -> {
+                            view?.hideLoader()
+                            view?.showChips()
                             view?.populateForecastData(result.value)
                         }
                         is ResultWrapper.Error -> {
+                            view?.hideLoader()
+                            view?.hideChips()
                             view?.showError(result.error.message ?: "something went wrong")
                         }
                     }
                 }, {
-                    view?.showError(it.message ?: "something went wrong")
-                }).also {
-                    compositeDisposable.add(it)
-                }
-        } else {
-            forecastRepository.getFiveDayForecast(key)
-                .subscribeOn(ioSchedulers)
-                .observeOn(mainSchedulers)
-                .subscribe({ result ->
-                    when (result) {
-                        is ResultWrapper.Value -> {
-                            view?.populateForecastData(result.value)
-                        }
-                        is ResultWrapper.Error -> {
-                            view?.showError(result.error.message ?: "something went wrong")
-                        }
-                    }
-                }, {
+                    view?.hideLoader()
                     view?.showError(it.message ?: "something went wrong")
                 }).also {
                     compositeDisposable.add(it)

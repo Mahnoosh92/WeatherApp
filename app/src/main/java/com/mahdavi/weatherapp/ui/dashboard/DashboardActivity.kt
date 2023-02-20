@@ -11,12 +11,13 @@ import com.mahdavi.weatherapp.R
 import com.mahdavi.weatherapp.data.model.local.cities.City
 import com.mahdavi.weatherapp.databinding.ActivityDashboardBinding
 import com.mahdavi.weatherapp.ui.auth.AuthActivity
-import com.mahdavi.weatherapp.ui.base.BaseActivity
 import com.mahdavi.weatherapp.ui.dashboard.home.HomeFragment
 import com.mahdavi.weatherapp.ui.dashboard.news.NewsFragment
 import com.mahdavi.weatherapp.ui.dashboard.settings.SettingsFragment
 import com.mahdavi.weatherapp.ui.dashboard.weather.WeatherFragment
+import com.mahdavi.weatherapp.ui.dashboard.weather.search.SearchFragment
 import com.mahdavi.weatherapp.ui.details.DetailsActivity
+import com.mahdavi.weatherapp.utils.extensions.popBackStack
 import com.mahdavi.weatherapp.utils.extensions.replaceFragment
 import javax.inject.Inject
 
@@ -25,7 +26,6 @@ class DashboardActivity : AppCompatActivity(), DashboardContract.View {
 
     private lateinit var binding: ActivityDashboardBinding
     lateinit var dashboardComponent: DashboardComponent
-
 
     @Inject
     lateinit var presenter: DashboardContract.Presenter
@@ -82,6 +82,10 @@ class DashboardActivity : AppCompatActivity(), DashboardContract.View {
         finish()
     }
 
+    override fun navigateToSearch() {
+        replaceFragment(SearchFragment(), binding.mainContainer.id, true)
+    }
+
     override fun navigateToDetails(city: City) {
         val intent = Intent(this, DetailsActivity::class.java)
         intent.putExtra(DetailsActivity.KEY_CITY, city)
@@ -99,6 +103,10 @@ class DashboardActivity : AppCompatActivity(), DashboardContract.View {
             intent.setPackage(null)
             binding.root.context.startActivity(intent)
         }
+    }
+
+    override fun navigateBack() {
+        popBackStack()
     }
 
     override fun onDestroy() {

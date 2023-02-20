@@ -12,6 +12,8 @@ import com.mahdavi.weatherapp.ui.dashboard.home.HomeContract
 import com.mahdavi.weatherapp.ui.dashboard.home.HomePresenter
 import com.mahdavi.weatherapp.ui.dashboard.news.NewsContract
 import com.mahdavi.weatherapp.ui.dashboard.news.NewsPresenter
+import com.mahdavi.weatherapp.ui.dashboard.weather.search.SearchContract
+import com.mahdavi.weatherapp.ui.dashboard.weather.search.SearchPresenter
 import com.mahdavi.weatherapp.ui.dashboard.settings.SettingsContract
 import com.mahdavi.weatherapp.ui.dashboard.settings.SettingsPresenter
 import com.mahdavi.weatherapp.ui.dashboard.weather.WeatherContract
@@ -55,4 +57,8 @@ abstract class PresenterModules {
 
     @Binds
     abstract fun bindDetailsPresenter(detailsPresenter: DetailsPresenter): DetailsContract.Presenter
+
+    @Binds
+    abstract fun bindSearchPresenter(searchPresenter: SearchPresenter): SearchContract.Presenter
+
 }

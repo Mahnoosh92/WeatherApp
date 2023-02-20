@@ -1,15 +1,12 @@
 package com.mahdavi.weatherapp.ui.dashboard.weather
 
-import android.content.ActivityNotFoundException
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import androidx.core.view.isVisible
+import androidx.fragment.app.setFragmentResultListener
 import com.mahdavi.weatherapp.data.model.local.cities.CityAutoComplete
 import com.mahdavi.weatherapp.data.model.local.forecast.DayForecast
 import com.mahdavi.weatherapp.databinding.FragmentWeatherBinding
@@ -17,16 +14,16 @@ import com.mahdavi.weatherapp.ui.base.BaseFragment
 import com.mahdavi.weatherapp.ui.dashboard.DashboardActivity
 import com.mahdavi.weatherapp.ui.dashboard.weather.adapter.ForecastDayAdapter
 import com.mahdavi.weatherapp.ui.dashboard.weather.click.ClickListener
-import com.mahdavi.weatherapp.utils.extensions.getQueryTextChange
+import com.mahdavi.weatherapp.ui.dashboard.weather.search.SearchFragment
 import com.mahdavi.weatherapp.utils.extensions.observableClickListener
 import com.mahdavi.weatherapp.utils.extensions.shortSnackBar
+import com.mahdavi.weatherapp.widget.searchbar.SearchbarClickedCallback
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
 class WeatherFragment : BaseFragment(), WeatherContract.View, ClickListener {
-
     @Inject
     lateinit var presenter: WeatherContract.Presenter
 
@@ -37,15 +34,12 @@ class WeatherFragment : BaseFragment(), WeatherContract.View, ClickListener {
         CompositeDisposable()
     }
 
-    private var _adapter: ArrayAdapter<String>? = null
-
     private val forecastDayAdapter: ForecastDayAdapter by lazy {
         ForecastDayAdapter(this)
     }
 
     private var currentCity: List<CityAutoComplete>? = null
 
-    private var autoCompleteCities: List<CityAutoComplete>? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -60,7 +54,13 @@ class WeatherFragment : BaseFragment(), WeatherContract.View, ClickListener {
     }
 
     override fun setupUi() {
-        /*NO_OP*/
+        setFragmentResultListener(SearchFragment.KEY_CITY) { reqKey, bundle ->
+            if (reqKey == SearchFragment.KEY_CITY) {
+                val selectedCity = bundle.getParcelable<CityAutoComplete>(SearchFragment.KEY_RESULT)
+                binding.searchEditText.text = selectedCity?.localizedName
+                presenter.getForecastData(selectedCity?.key ?: "", 0)
+            }
+        }
     }
 
     override fun registerView() {
@@ -73,30 +73,10 @@ class WeatherFragment : BaseFragment(), WeatherContract.View, ClickListener {
 
     override fun setupListeners() {
         binding.apply {
-            presenter.getAutoCompleteCities(search.getQueryTextChange())
-            search.setOnItemClickListener { _, _, position, _ ->
-                val value = _adapter?.getItem(position) ?: ""
-                currentCity = autoCompleteCities?.filter { city ->
-                    city.localizedName == value
-                }
-                if (currentCity.isNullOrEmpty().not()) {
-                    presenter.getForecastData(currentCity?.first()?.key.toString(), 0)
-                }
+            search.setOnClickListener {
+                (requireActivity() as DashboardActivity).navigateToSearch()
             }
-            OneDay.observableClickListener()
-                .debounce(300, TimeUnit.MILLISECONDS)
-                .subscribe {
-                    presenter.getForecastData(currentCity?.first()?.key.toString(), 0)
-                }.also {
-                    compositeDisposable.add(it)
-                }
-            FiveDay.observableClickListener()
-                .debounce(300, TimeUnit.MILLISECONDS)
-                .subscribe {
-                    presenter.getForecastData(currentCity?.first()?.key.toString(), 1)
-                }.also {
-                    compositeDisposable.add(it)
-                }
+
         }
     }
 
@@ -115,43 +95,16 @@ class WeatherFragment : BaseFragment(), WeatherContract.View, ClickListener {
     }
 
     override fun showChips() {
-        with(binding) {
-            if (forecastTypesContainer.isVisible.not()) {
-                forecastTypesContainer.isVisible = true
-            }
-            loading.visibility = View.GONE
-        }
+        /*NO_OP*/
     }
 
     override fun hideChips() {
-        with(binding) {
-            if (forecastTypesContainer.isVisible) {
-                forecastTypesContainer.isVisible = false
-            }
-            loading.visibility = View.VISIBLE
-        }
+        /*NO_OP*/
     }
 
 
     override fun showError(message: String) {
         binding.root.shortSnackBar(message)
-    }
-
-    override fun populateAutoCompleteData(cities: List<CityAutoComplete>?) {
-        autoCompleteCities = cities
-        val list = ArrayList<String>()
-        cities?.let {
-            it.map { cityAutoComplete ->
-                if (!list.contains(cityAutoComplete.localizedName)) list.add(
-                    cityAutoComplete.localizedName
-                )
-            }
-            this._adapter =
-                ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, list)
-            binding.search.setAdapter(_adapter)
-            _adapter?.setNotifyOnChange(true)
-//            binding.search?.showDropDown()
-        }
     }
 
     override fun populateForecastData(data: List<DayForecast>?) {

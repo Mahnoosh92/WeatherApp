@@ -125,15 +125,15 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ic_lat"
             android:layout_marginTop="@dimen/margin_20"
-            android:src="@drawable/ic_cloud" />
+            tools:src="@drawable/ic_cloud" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ic_forcast"
-            android:layout_width="@dimen/fixed_50"
-            android:layout_height="@dimen/fixed_50"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="@id/ic_condition"
-            android:src="@drawable/ic_forcast" />
+            android:src="@drawable/more" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

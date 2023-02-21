@@ -32,16 +32,15 @@ class DetailsActivity : BaseActivity(), DetailsContract.View {
     }
 
     override fun setupUi() {
-        populateDetails()
+        presenter.setUpLoader(false)
     }
 
-    private fun populateDetails() {
+    override fun populateDetails() {
         val city = if (Build.VERSION.SDK_INT >= 33) {
             intent.getParcelableExtra(KEY_CITY, City::class.java)
         } else {
             intent.getParcelableExtra(KEY_CITY)
         }
-        presenter.setUpLoader(false)
         binding.apply {
             countryValue.text = city?.country
             englishNameValue.text = city?.englishName

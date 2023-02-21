@@ -26,17 +26,18 @@ class DefaultAuthDataSource @Inject constructor(private val firebaseAuth: Fireba
                 }
         }
 
-    override fun signInWithCredential(account: GoogleSignInAccount): Completable = Completable.create{emitter->
-        val credential = GoogleAuthProvider.getCredential(account.idToken, null)
-        firebaseAuth.signInWithCredential(credential)
-        .addOnCompleteListener { task ->
-            if (!emitter.isDisposed) {
-                if (task.isSuccessful)
-                    emitter.onComplete()
-                else
-                    emitter.onError(task.exception!!)
-            }
+    override fun signInWithCredential(account: GoogleSignInAccount): Completable =
+        Completable.create { emitter ->
+            val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+            firebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener { task ->
+                    if (!emitter.isDisposed) {
+                        if (task.isSuccessful)
+                            emitter.onComplete()
+                        else
+                            emitter.onError(task.exception!!)
+                    }
+                }
         }
-    }
 
 }

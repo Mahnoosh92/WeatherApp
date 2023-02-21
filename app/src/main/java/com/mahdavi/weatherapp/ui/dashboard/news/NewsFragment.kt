@@ -9,14 +9,12 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mahdavi.weatherapp.data.model.local.news.Article
+import com.mahdavi.weatherapp.data.model.remote.news.HeadlineArticle
 import com.mahdavi.weatherapp.databinding.FragmentNewsBinding
 import com.mahdavi.weatherapp.ui.base.BaseFragment
 import com.mahdavi.weatherapp.ui.dashboard.DashboardActivity
 import com.mahdavi.weatherapp.ui.dashboard.news.adapter.NewsAdapter
 import com.mahdavi.weatherapp.utils.extensions.shortSnackBar
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.processors.PublishProcessor
 import javax.inject.Inject
 
 
@@ -91,8 +89,8 @@ class NewsFragment : BaseFragment(), NewsContract.View {
         binding.root.shortSnackBar(message)
     }
 
-    override fun populateNews(news: List<Article>) {
-        newsAdapter.addItems(news)
+    override fun populateNews(news: List<Article?>) {
+        newsAdapter.addItems(news.filterNotNull())
     }
 
     override fun onDestroyView() {
@@ -102,6 +100,7 @@ class NewsFragment : BaseFragment(), NewsContract.View {
 
     override fun onDestroy() {
         super.onDestroy()
+        presenter.detachView(this)
         presenter.destroy()
         _binding = null
     }

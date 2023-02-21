@@ -2,6 +2,7 @@ package com.mahdavi.weatherapp.ui.dashboard.news
 
 import com.mahdavi.weatherapp.data.model.local.ResultWrapper
 import com.mahdavi.weatherapp.data.model.local.news.Article
+import com.mahdavi.weatherapp.data.model.remote.news.HeadlineArticle
 import com.mahdavi.weatherapp.ui.base.BasePresenter
 import com.mahdavi.weatherapp.ui.base.BaseView
 import io.reactivex.rxjava3.core.Flowable
@@ -14,7 +15,7 @@ interface NewsContract {
 
         fun showError(message: String)
 
-        fun populateNews(news: List<Article>)
+        fun populateNews(news: List<Article?>)
     }
 
     interface Presenter : BasePresenter<View> {

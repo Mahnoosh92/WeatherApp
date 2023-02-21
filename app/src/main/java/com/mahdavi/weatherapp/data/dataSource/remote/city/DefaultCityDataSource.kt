@@ -6,7 +6,9 @@ import com.mahdavi.weatherapp.di.WeatherApiService
 import io.reactivex.rxjava3.core.Flowable
 import javax.inject.Inject
 
-class DefaultCityDataSource @Inject constructor(@WeatherApiService private val apiService: ApiService) : CityDataSource{
+class DefaultCityDataSource @Inject constructor(@WeatherApiService private val apiService: ApiService) :
+    CityDataSource {
     override fun getTopCities(size: Int) = apiService.getTopCities(size)
-    override fun getAutoCompletedCities(city: String) = apiService.getAutoCompletedCities(city = city)
+    override fun getAutoCompletedCities(city: String) =
+        apiService.getAutoCompletedCities(city = city)
 }

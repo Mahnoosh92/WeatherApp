@@ -27,14 +27,14 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/margin_20"
         android:layout_marginTop="@dimen/margin_20"
+        android:visibility="gone"
         app:cardCornerRadius="@dimen/radius_12"
         app:cardElevation="@dimen/elevation_10"
-        android:id="@+id/details"
-        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/appbar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -106,17 +106,12 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <com.airbnb.lottie.LottieAnimationView
+    <ProgressBar
         android:id="@+id/loading"
-        android:layout_width="@dimen/fixed_300"
-        android:layout_height="@dimen/fixed_300"
-        android:layout_gravity="center"
-        android:visibility="visible"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="@dimen/fixed_100"
+        android:layout_height="@dimen/fixed_100"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:lottie_rawRes="@raw/loading" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

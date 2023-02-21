@@ -49,8 +49,7 @@ class SignUpWithPhoneFragment : BaseFragment(), SignUpWithPhoneContract.View {
         }
 
         override fun onCodeSent(
-            verificationId: String,
-            token: PhoneAuthProvider.ForceResendingToken
+            verificationId: String, token: PhoneAuthProvider.ForceResendingToken
         ) {
             storedVerificationId = verificationId
             resendToken = token
@@ -62,7 +61,6 @@ class SignUpWithPhoneFragment : BaseFragment(), SignUpWithPhoneContract.View {
                 otpLayout.isVisible = true
             }
         }
-
     }
 
     override fun onAttach(context: Context) {
@@ -79,39 +77,27 @@ class SignUpWithPhoneFragment : BaseFragment(), SignUpWithPhoneContract.View {
     }
 
     override fun setupSubscribers() {
-        val getVerificationCodeDisposable = binding.login
-            .observableClickListener()
-            .subscribe(
-                { onNext ->
+        val getVerificationCodeDisposable =
+            binding.login.observableClickListener().subscribe({ onNext ->
                     sendVerificationCode(binding.codeNumber.selectedCountryCodeWithPlus.toString() + binding.phoneNumber.text.toString())
-                },
-                { onError ->
+                }, { onError ->
                     binding.root.shortSnackBar(
                         onError.message ?: resources.getString(R.string.general_error)
                     )
-                },
-                {
-
-                }
-            )
+                }, {
+                })
         compositeDisposable.add(getVerificationCodeDisposable)
-        val verifyOTPDisposable = binding.verifyOtp
-            .observableClickListener()
-            .subscribe(
-                { onNext ->
-                    binding.apply {
-                        verifyVerificationCode(pinview.value)
-                    }
-                },
-                { onError ->
-                    binding.root.shortSnackBar(
-                        onError.message ?: resources.getString(R.string.general_error)
-                    )
-                },
-                {
-
+        val verifyOTPDisposable = binding.verifyOtp.observableClickListener().subscribe({ onNext ->
+                binding.apply {
+                    verifyVerificationCode(pinview.value)
                 }
-            )
+            }, { onError ->
+                binding.root.shortSnackBar(
+                    onError.message ?: resources.getString(R.string.general_error)
+                )
+            }, {
+
+            })
         compositeDisposable.add(verifyOTPDisposable)
     }
 
@@ -125,8 +111,7 @@ class SignUpWithPhoneFragment : BaseFragment(), SignUpWithPhoneContract.View {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentLoginWithPhoneBinding.inflate(inflater, container, false)
         return binding.root

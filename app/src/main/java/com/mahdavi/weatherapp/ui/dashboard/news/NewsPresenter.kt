@@ -19,7 +19,7 @@ class NewsPresenter @Inject constructor(
     private var view: NewsContract.View? = null
     override fun getNews(page: Int) {
         view?.showLoader()
-        newsRepository.getNews(page, true)
+        newsRepository.getNews(page = page, update = true)
             .subscribeOn(ioScheduler)
             .observeOn(mainScheduler)
             .subscribe({ result ->
@@ -42,6 +42,7 @@ class NewsPresenter @Inject constructor(
     }
 
     override fun detachView(view: NewsContract.View) {
+        this.view = null
     }
 
     override fun attachView(view: NewsContract.View) {
@@ -49,7 +50,6 @@ class NewsPresenter @Inject constructor(
     }
 
     override fun destroy() {
-        view = null
         compositeDisposable.clear()
     }
 }

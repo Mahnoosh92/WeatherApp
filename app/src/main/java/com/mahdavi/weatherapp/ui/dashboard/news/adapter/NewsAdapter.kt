@@ -3,15 +3,17 @@ package com.mahdavi.weatherapp.ui.dashboard.news.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.mahdavi.weatherapp.data.model.local.news.Article
-import com.mahdavi.weatherapp.databinding.NewsItemBinding
+import com.mahdavi.weatherapp.data.model.remote.news.HeadlineArticle
+import com.mahdavi.weatherapp.databinding.NewsItemLayoutBinding
 
 class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val data: MutableList<Article> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val binding = NewsItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = NewsItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ArticleViewHolder(binding)
     }
 
@@ -28,13 +30,14 @@ class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         (holder as ArticleViewHolder).bind(data[position], position)
     }
 
-    inner class ArticleViewHolder(private val binding: NewsItemBinding) :
+    inner class ArticleViewHolder(private val binding: NewsItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(article: Article, index: Int) {
             binding.apply {
-                //articleText.text = article.author
-                articleText.text = index.toString()
+                newsImage.load(article.media)
+                newsTitle.text = article.title
+                newsSummary.text = article.summary
             }
         }
     }

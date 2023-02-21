@@ -8,6 +8,7 @@ interface DetailsContract {
         fun showLoader()
         fun hideLoader()
         fun showError(message: String)
+        fun populateDetails()
     }
 
     interface Presenter : BasePresenter<View> {

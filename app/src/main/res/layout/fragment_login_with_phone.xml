@@ -13,6 +13,7 @@
         android:id="@+id/code_number"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:ccp_defaultPhoneCode="44"
         android:layout_marginBottom="@dimen/padding_20"
         android:layout_weight="0.2"
         app:ccp_showFullName="false"

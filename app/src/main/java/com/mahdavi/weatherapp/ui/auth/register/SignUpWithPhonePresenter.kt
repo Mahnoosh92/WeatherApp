@@ -33,6 +33,7 @@ class SignUpWithPhonePresenter @Inject constructor(
     }
 
     override fun detachView(view: SignUpWithPhoneContract.View) {
+        this.view = null
     }
 
     override fun attachView(view: SignUpWithPhoneContract.View) {

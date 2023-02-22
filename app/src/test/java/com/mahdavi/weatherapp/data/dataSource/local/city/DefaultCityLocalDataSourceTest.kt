@@ -23,13 +23,18 @@ internal class DefaultCityLocalDataSourceTest {
     }
     @After
     fun tearDown() {
-
+        /*NO_OP*/
     }
 
     @Test
     fun `test getCities`() {
         defaultCityLocalDataSource.getCities()
-
         Mockito.verify(cityDao, times(1)).getCities()
+    }
+
+    @Test
+    fun `test updateCities`() {
+        defaultCityLocalDataSource.updateCities(cities = emptyList())
+        Mockito.verify(cityDao, times(1)).updateCities(emptyList())
     }
 }

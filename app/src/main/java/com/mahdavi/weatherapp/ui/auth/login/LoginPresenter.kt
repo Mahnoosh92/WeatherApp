@@ -41,7 +41,6 @@ class LoginPresenter @Inject constructor(
             }).also {
                 compositeDisposable.add(it)
             }
-
     }
 
     override fun detachView(view: LoginContract.View) {

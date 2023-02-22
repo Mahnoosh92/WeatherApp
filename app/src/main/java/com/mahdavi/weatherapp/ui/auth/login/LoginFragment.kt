@@ -18,6 +18,7 @@ import com.mahdavi.weatherapp.databinding.FragmentLoginBinding
 import com.mahdavi.weatherapp.ui.auth.AuthActivity
 import com.mahdavi.weatherapp.ui.auth.login.adapter.LoginPageAdapter
 import com.mahdavi.weatherapp.ui.base.BaseFragment
+import com.mahdavi.weatherapp.utils.EspressoIdlingResource
 import com.mahdavi.weatherapp.utils.extensions.observableClickListener
 import com.mahdavi.weatherapp.utils.extensions.shortSnackBar
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -88,6 +89,7 @@ class LoginFragment : BaseFragment(), LoginContract.View {
         }
         binding.apply {
             googleAccount.setOnClickListener {
+                EspressoIdlingResource.increment()
                 val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestIdToken(getString(R.string.web_client_id))
                     .requestEmail().build()

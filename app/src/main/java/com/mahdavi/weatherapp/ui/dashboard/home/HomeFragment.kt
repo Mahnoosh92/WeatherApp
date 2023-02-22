@@ -14,6 +14,7 @@ import com.mahdavi.weatherapp.ui.base.BaseFragment
 import com.mahdavi.weatherapp.ui.dashboard.DashboardActivity
 import com.mahdavi.weatherapp.ui.dashboard.home.adapter.CityAdapter
 import com.mahdavi.weatherapp.ui.dashboard.home.click.ClickListener
+import com.mahdavi.weatherapp.utils.EspressoIdlingResource
 import com.mahdavi.weatherapp.utils.extensions.getQueryTextChange
 import com.mahdavi.weatherapp.utils.extensions.shortSnackBar
 import java.util.concurrent.TimeUnit
@@ -82,6 +83,7 @@ class HomeFragment : BaseFragment(), HomeContract.View, ClickListener {
     override fun populateData(cities: List<City>?) {
         binding.recyclerView?.adapter = adapter
         adapter.submitList(cities)
+        EspressoIdlingResource.decrement()
     }
 
     override fun onClick(city: City) {

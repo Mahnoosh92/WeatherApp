@@ -4,6 +4,7 @@ import com.mahdavi.weatherapp.data.model.local.ResultWrapper
 import com.mahdavi.weatherapp.data.repository.city.CityRepository
 import com.mahdavi.weatherapp.di.IoSchedulers
 import com.mahdavi.weatherapp.di.MainSchedulers
+import com.mahdavi.weatherapp.utils.wrapEspressoIdlingResource
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import javax.inject.Inject

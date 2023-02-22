@@ -26,7 +26,7 @@ internal class DefaultCityDataSourceTest {
 
     @After
     fun tearDown() {
-
+        /*NO_OP*/
     }
 
     @Test

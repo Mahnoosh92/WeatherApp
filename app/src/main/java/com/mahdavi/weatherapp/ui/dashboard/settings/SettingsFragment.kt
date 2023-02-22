@@ -16,6 +16,7 @@ import com.mahdavi.weatherapp.ui.dashboard.DashboardActivity
 import com.mahdavi.weatherapp.ui.dashboard.home.HomeContract
 import com.mahdavi.weatherapp.utils.extensions.observableClickListener
 import com.mahdavi.weatherapp.utils.extensions.shortSnackBar
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -28,14 +29,14 @@ class SettingsFragment : BaseFragment(), SettingsContract.View {
 
     @Inject
     lateinit var presenter: SettingsContract.Presenter
-
+    private val compositeDisposable = CompositeDisposable()
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (activity as DashboardActivity).dashboardComponent.inject(this)
     }
 
     override fun setupUi() {
-
+        /*NO_OP*/
     }
 
     override fun registerView() {
@@ -43,7 +44,7 @@ class SettingsFragment : BaseFragment(), SettingsContract.View {
     }
 
     override fun setupSubscribers() {
-
+        /*NO_OP*/
     }
 
     override fun setupListeners() {
@@ -52,7 +53,7 @@ class SettingsFragment : BaseFragment(), SettingsContract.View {
             .debounce(300, TimeUnit.MILLISECONDS)
             .subscribe {
                 presenter.signOut()
-            }
+            }.also { compositeDisposable.add(it) }
     }
 
     override fun onCreateView(
@@ -64,11 +65,11 @@ class SettingsFragment : BaseFragment(), SettingsContract.View {
     }
 
     override fun showLoader() {
-
+        /*NO_OP*/
     }
 
     override fun hideLoader() {
-
+        /*NO_OP*/
     }
 
     override fun navigateToAuth() {
@@ -79,4 +80,10 @@ class SettingsFragment : BaseFragment(), SettingsContract.View {
         binding.root.shortSnackBar(message)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+        presenter.detachView(this)
+        presenter.destroy()
+    }
 }

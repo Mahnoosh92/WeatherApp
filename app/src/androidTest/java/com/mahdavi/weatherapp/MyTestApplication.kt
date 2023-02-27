@@ -1,7 +1,7 @@
 package com.mahdavi.weatherapp
 
 import com.mahdavi.weatherapp.di.AppComponent
-import com.mahdavi.weatherapp.di.DaggerTestAppComponent
+import com.mahdavi.weatherapp.di.fake.DaggerTestAppComponent
 
 /**
  * MyTestApplication will override MyApplication in android tests

@@ -1,4 +1,4 @@
-package com.mahdavi.weatherapp.di
+package com.mahdavi.weatherapp.di.fake
 
 import androidx.test.platform.app.InstrumentationRegistry
 import dagger.Module

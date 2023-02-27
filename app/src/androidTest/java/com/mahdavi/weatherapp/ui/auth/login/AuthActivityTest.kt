@@ -46,7 +46,7 @@ class AuthActivityTest {
     }
 
     @Test
-    fun create_account_using_phone_number_flow() {
+    fun create_account_using_google_flow() {
         // Should be on LoginFragment
         onView(withId(R.id.google_account)).perform(click())
 

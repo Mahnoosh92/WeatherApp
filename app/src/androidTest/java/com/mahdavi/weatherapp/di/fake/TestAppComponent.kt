@@ -1,5 +1,6 @@
-package com.mahdavi.weatherapp.di
+package com.mahdavi.weatherapp.di.fake
 
+import com.mahdavi.weatherapp.di.*
 import dagger.Component
 import javax.inject.Singleton
 

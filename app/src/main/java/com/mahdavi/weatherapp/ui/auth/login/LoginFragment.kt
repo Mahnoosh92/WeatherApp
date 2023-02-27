@@ -89,7 +89,6 @@ class LoginFragment : BaseFragment(), LoginContract.View {
         }
         binding.apply {
             googleAccount.setOnClickListener {
-                EspressoIdlingResource.increment()
                 val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestIdToken(getString(R.string.web_client_id))
                     .requestEmail().build()

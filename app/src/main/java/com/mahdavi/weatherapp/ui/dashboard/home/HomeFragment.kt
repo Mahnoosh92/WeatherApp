@@ -83,7 +83,6 @@ class HomeFragment : BaseFragment(), HomeContract.View, ClickListener {
     override fun populateData(cities: List<City>?) {
         binding.recyclerView?.adapter = adapter
         adapter.submitList(cities)
-        EspressoIdlingResource.decrement()
     }
 
     override fun onClick(city: City) {

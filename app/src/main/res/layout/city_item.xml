@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view_top_cities"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_10"
@@ -18,9 +18,9 @@
             android:id="@+id/ic_country"
             android:layout_width="@dimen/fixed_30"
             android:layout_height="@dimen/fixed_30"
+            android:layout_marginTop="@dimen/margin_10"
             android:src="@drawable/ic_country"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="@dimen/margin_10"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -29,18 +29,18 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_20"
-            android:textSize="@dimen/font_18"
-            android:textStyle="bold"
-            android:textColor="@color/black_800"
-            app:layout_constraintBottom_toBottomOf="@id/ic_country"
-            app:layout_constraintStart_toEndOf="@id/ic_country"
-            app:layout_constraintTop_toTopOf="@id/ic_country"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/margin_10"
             android:ellipsize="end"
             android:inputType="textMultiLine"
             android:maxLines="2"
-            android:layout_marginTop="@dimen/margin_10"
-            tools:text="country mmmkjkhkhjhjkhjkhkjhkjhkjhkjhkjhkjhjkhjkhjkhjkhjkhkjhjkhkjhjkhjkhjkhj" />
+            android:textColor="@color/black_800"
+            android:textSize="@dimen/font_18"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/ic_country"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ic_country"
+            app:layout_constraintTop_toTopOf="@id/ic_country"
+            tools:text="country" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ic_long"
@@ -59,9 +59,9 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_20"
             android:text="@string/longitude"
+            android:textColor="@color/black_800"
             android:textSize="@dimen/font_18"
             android:textStyle="bold"
-            android:textColor="@color/black_800"
             app:layout_constraintBottom_toBottomOf="@id/ic_long"
             app:layout_constraintStart_toEndOf="@id/ic_long"
             app:layout_constraintTop_toTopOf="@id/ic_long" />
@@ -72,9 +72,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_20"
+            android:textColor="@color/black_800"
             android:textSize="@dimen/font_16"
             android:textStyle="bold"
-            android:textColor="@color/black_800"
             app:layout_constraintBottom_toBottomOf="@id/longitude_title"
             app:layout_constraintStart_toEndOf="@id/longitude_title"
             app:layout_constraintTop_toTopOf="@id/longitude_title"
@@ -96,9 +96,9 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_20"
             android:text="@string/latitude"
+            android:textColor="@color/black_800"
             android:textSize="@dimen/font_18"
             android:textStyle="bold"
-            android:textColor="@color/black_800"
             app:layout_constraintBottom_toBottomOf="@id/ic_lat"
             app:layout_constraintStart_toEndOf="@id/ic_lat"
             app:layout_constraintTop_toTopOf="@id/ic_lat" />
@@ -109,9 +109,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_20"
+            android:textColor="@color/black_800"
             android:textSize="@dimen/font_16"
             android:textStyle="bold"
-            android:textColor="@color/black_800"
             app:layout_constraintBottom_toBottomOf="@id/latitude_title"
             app:layout_constraintStart_toEndOf="@id/latitude_title"
             app:layout_constraintTop_toTopOf="@id/latitude_title"
@@ -121,19 +121,19 @@
             android:id="@+id/ic_condition"
             android:layout_width="@dimen/fixed_50"
             android:layout_height="@dimen/fixed_50"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ic_lat"
             android:layout_marginTop="@dimen/margin_20"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ic_lat"
             tools:src="@drawable/ic_cloud" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ic_forcast"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/more"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="@id/ic_condition"
-            android:src="@drawable/more" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ic_condition" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

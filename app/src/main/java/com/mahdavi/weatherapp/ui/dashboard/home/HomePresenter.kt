@@ -22,23 +22,26 @@ class HomePresenter @Inject constructor(
     private var view: HomeContract.View? = null
 
     override fun getCities(size: Int, update: Boolean) {
-        view?.showLoader()
-        cityRepository.getTopCities(size, update).subscribeOn(ioSchedulers)
-            .observeOn(mainSchedulers).subscribe({ result ->
-                when (result) {
-                    is ResultWrapper.Value -> {
-                        view?.hideLoader()
-                        view?.populateData(result.value)
+        wrapEspressoIdlingResource {
+            view?.showLoader()
+            cityRepository.getTopCities(size, update).subscribeOn(ioSchedulers)
+                .observeOn(mainSchedulers)
+                .subscribe({ result ->
+                    when (result) {
+                        is ResultWrapper.Value -> {
+                            view?.hideLoader()
+                            view?.populateData(result.value)
+                        }
+                        is ResultWrapper.Error -> {
+                            view?.showError(result.error.message ?: "Something went wrong")
+                        }
                     }
-                    is ResultWrapper.Error -> {
-                        view?.showError(result.error.message ?: "Something went wrong")
-                    }
+                }, { onError ->
+                    view?.showError(onError.message ?: "Something went wrong!")
+                }).also {
+                    compositeDisposable.add(it)
                 }
-            }, { onError ->
-                view?.showError(onError.message ?: "Something went wrong!")
-            }).also {
-                compositeDisposable.add(it)
-            }
+        }
     }
 
     override fun detachView(view: HomeContract.View) {

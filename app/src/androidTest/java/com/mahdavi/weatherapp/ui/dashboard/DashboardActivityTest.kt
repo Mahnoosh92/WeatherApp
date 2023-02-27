@@ -3,8 +3,10 @@ package com.mahdavi.weatherapp.ui.dashboard
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
@@ -54,5 +56,10 @@ class DashboardActivityTest {
                 clickOnViewChild(R.id.card_view_top_cities)
             )
         )
+    }
+
+    @Test
+    fun test() {
+        onView(withId(R.id.weather)).perform(click())
     }
 }

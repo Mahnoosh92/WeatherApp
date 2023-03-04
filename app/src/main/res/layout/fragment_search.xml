@@ -8,7 +8,7 @@
     tools:context=".ui.dashboard.weather.search.SearchFragment">
 
     <com.mahdavi.weatherapp.widget.searchbar.Searchbar
-        android:id="@+id/search"
+        android:id="@+id/search_text_city"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:sb_enabled="true" />

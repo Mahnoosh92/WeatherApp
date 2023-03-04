@@ -12,6 +12,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.mahdavi.weatherapp.R
 import com.mahdavi.weatherapp.util.clickOnViewChild
+import com.mahdavi.weatherapp.util.setTextInTextView
 import com.mahdavi.weatherapp.utils.EspressoIdlingResource
 import org.junit.After
 import org.junit.Before
@@ -59,7 +60,21 @@ class DashboardActivityTest {
     }
 
     @Test
-    fun test() {
+    fun test_bottom_navigation_to_weather() {
         onView(withId(R.id.weather)).perform(click())
+    }
+    @Test
+    fun test_city_autocomplete() {
+        onView(withId(R.id.weather)).perform(click())
+        onView(withId(R.id.search_edit_text)).perform(click())
+
+        onView(withId(R.id.search_text_city)).perform(setTextInTextView("guil"))
+
+        onView(withId(R.id.recycleview)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                1,
+                clickOnViewChild(R.id.cityName)
+            )
+        )
     }
 }

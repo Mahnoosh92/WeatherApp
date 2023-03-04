@@ -1,6 +1,8 @@
 package com.mahdavi.weatherapp.di.fake
 
+import android.content.Context
 import com.mahdavi.weatherapp.di.*
+import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
 
@@ -17,7 +19,12 @@ import javax.inject.Singleton
         ThreadingModule::class,
         AppSubcomponents::class,
         FirebaseModule::class,
-        ContextModule::class
+//        ContextModule::class
     ]
 )
-interface TestAppComponent : AppComponent
+interface TestAppComponent : AppComponent {
+    @Component.Factory
+    interface Factory {
+        fun create(@BindsInstance context: Context): TestAppComponent
+    }
+}

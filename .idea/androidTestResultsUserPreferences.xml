@@ -3,6 +3,20 @@
   <component name="AndroidTestResultsUserPreferences">
     <option name="androidTestResultsTableState">
       <map>
+        <entry key="-1360798759">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="Duration" value="90" />
+                  <entry key="R9JN408WB6J" value="120" />
+                  <entry key="Tests" value="360" />
+                  <entry key="samsung&#10; SM-M115F" value="120" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
         <entry key="-1325370625">
           <value>
             <AndroidTestResultsTableState>
@@ -140,6 +154,20 @@
             </AndroidTestResultsTableState>
           </value>
         </entry>
+        <entry key="1449135547">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="Duration" value="90" />
+                  <entry key="R9JN408WB6J" value="120" />
+                  <entry key="Tests" value="360" />
+                  <entry key="samsung&#10; SM-M115F" value="120" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
         <entry key="1650826853">
           <value>
             <AndroidTestResultsTableState>
@@ -177,6 +205,20 @@
                   <entry key="Duration" value="90" />
                   <entry key="Tests" value="360" />
                   <entry key="adb-R9JN408WB6J-PgVxz2._adb-tls-connect._tcp." value="120" />
+                  <entry key="samsung&#10; SM-M115F" value="120" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
+        <entry key="2133960222">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="Duration" value="90" />
+                  <entry key="R9JN408WB6J" value="120" />
+                  <entry key="Tests" value="360" />
                   <entry key="samsung&#10; SM-M115F" value="120" />
                 </map>
               </option>

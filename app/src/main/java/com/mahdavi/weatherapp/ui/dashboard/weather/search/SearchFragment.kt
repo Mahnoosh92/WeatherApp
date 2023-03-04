@@ -47,7 +47,7 @@ class SearchFragment : BaseFragment(), SearchContract.View, SearchClickListener 
     }
 
     override fun setupListeners() {
-        presenter.getAutoCompleteCities(binding.search.getTextOnChange())
+        presenter.getAutoCompleteCities(binding.searchTextCity.getTextOnChange())
     }
 
     override fun onCreateView(
